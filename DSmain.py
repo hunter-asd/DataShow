@@ -8,6 +8,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from icon import Icon
+import os,base64
+with open('tmp.ico','wb') as tmp:
+    tmp.write(base64.b64decode(Icon().img))
 
 
 class Ui_DataShow(object):
@@ -15,7 +19,7 @@ class Ui_DataShow(object):
         DataShow.setObjectName("DataShow")
         DataShow.resize(926, 787)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("screen.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("tmp.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         DataShow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(DataShow)
         self.centralwidget.setObjectName("centralwidget")
@@ -285,26 +289,12 @@ class Ui_DataShow(object):
         self.statusbar = QtWidgets.QStatusBar(DataShow)
         self.statusbar.setObjectName("statusbar")
         DataShow.setStatusBar(self.statusbar)
-        self.actionIP = QtWidgets.QAction(DataShow)
-        self.actionIP.setObjectName("actionIP")
-        self.actionPORT = QtWidgets.QAction(DataShow)
-        self.actionPORT.setObjectName("actionPORT")
         self.actionopen_Cfg = QtWidgets.QAction(DataShow)
         self.actionopen_Cfg.setObjectName("actionopen_Cfg")
         self.actionSave_Cfg = QtWidgets.QAction(DataShow)
         self.actionSave_Cfg.setObjectName("actionSave_Cfg")
         self.actionParam = QtWidgets.QAction(DataShow)
         self.actionParam.setObjectName("actionParam")
-        self.actionScreen = QtWidgets.QAction(DataShow)
-        self.actionScreen.setObjectName("actionScreen")
-        self.actionNetwork = QtWidgets.QAction(DataShow)
-        self.actionNetwork.setObjectName("actionNetwork")
-        self.actionAxis = QtWidgets.QAction(DataShow)
-        self.actionAxis.setObjectName("actionAxis")
-        self.actionTitle = QtWidgets.QAction(DataShow)
-        self.actionTitle.setObjectName("actionTitle")
-        self.actionLineWidth = QtWidgets.QAction(DataShow)
-        self.actionLineWidth.setObjectName("actionLineWidth")
         self.actionabout = QtWidgets.QAction(DataShow)
         self.actionabout.setObjectName("actionabout")
         self.menuSetting.addAction(self.actionopen_Cfg)
@@ -357,14 +347,7 @@ class Ui_DataShow(object):
         self.menuSetting.setTitle(_translate("DataShow", "File"))
         self.menuSetting_2.setTitle(_translate("DataShow", "Setting"))
         self.menuAbout.setTitle(_translate("DataShow", "About"))
-        self.actionIP.setText(_translate("DataShow", "IP"))
-        self.actionPORT.setText(_translate("DataShow", "PORT"))
         self.actionopen_Cfg.setText(_translate("DataShow", "Open Cfg"))
         self.actionSave_Cfg.setText(_translate("DataShow", "Save Cfg"))
         self.actionParam.setText(_translate("DataShow", "Param"))
-        self.actionScreen.setText(_translate("DataShow", "Screen"))
-        self.actionNetwork.setText(_translate("DataShow", "Udp"))
-        self.actionAxis.setText(_translate("DataShow", "Axis"))
-        self.actionTitle.setText(_translate("DataShow", "Title"))
-        self.actionLineWidth.setText(_translate("DataShow", "LineWidth"))
         self.actionabout.setText(_translate("DataShow", "About"))

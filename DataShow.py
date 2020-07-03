@@ -10,7 +10,6 @@ import numpy as np
 import MDSplus
 import socket
 import pyqtgraph as pg
-import re
 from setting import Setting
 class DSmain(QMainWindow,Ui_DataShow):
     def __init__(self):
@@ -34,6 +33,8 @@ class DSmain(QMainWindow,Ui_DataShow):
         self.cfg["LineWidth"]=5
         self.cfg["LineColor1"]="red"
         self.cfg["LineColor2"]="blue"
+        self.cfg["TreeName"]="EXL50"
+        self.cfg["TreeIp"]="192.168.20.11"
         self.settingWidget=Setting()
         self.settingWidget.settingSignal.connect(self.getcfg)
         self.initAction()
@@ -90,7 +91,6 @@ class DSmain(QMainWindow,Ui_DataShow):
         self.actionSave_Cfg.triggered.connect(self.saveCfg_func)
         self.actionParam.triggered.connect(self.setParam)
         self.actionabout.triggered.connect(self.about)
-
     def about(self):
         QMessageBox.information(self, "about", "Version：1.0  Author：hunter ", QMessageBox.Yes)
     def setParam(self):
@@ -200,9 +200,9 @@ class DSmain(QMainWindow,Ui_DataShow):
         temcfg["DS10"]=self.DS10Node.text().split(",")
         # tree=MDSplus.Tree("exl50",shot)
         # tree.setTimeContext(self.cfg["sampleStart"],self.cfg["sampleEnd"],self.cfg["sampleStep"])
-        con=MDSplus.connection.Connection("192.168.20.11")
+        con=MDSplus.connection.Connection(self.cfg["TreeIp"])
         con.connect()
-        con.openTree("EXL50",shot)
+        con.openTree(self.cfg["TreeName"],shot)
         con.get("setTimeContext({},{},{})".format(self.cfg["sampleStart"],self.cfg["sampleEnd"],self.cfg["sampleStep"]))
         for k,v in temcfg.items():
             if "" not in v:

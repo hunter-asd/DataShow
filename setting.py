@@ -31,6 +31,8 @@ class Setting(QDialog,Ui_Setting):
         self.cfg["TitleSize"]=self.TitleSize.value()
         self.cfg["LegendSize"]=self.LegendSize.value()
         self.cfg["LineWidth"]=self.LineWidth.value()
+        self.cfg["TreeName"]=self.TreeName.text()
+        self.cfg["TreeIp"]=self.TreeIp.text()
         self.settingSignal.emit(self.cfg)
     def updateCfg(self,newCfg):
         self.cfg=newCfg
@@ -47,6 +49,8 @@ class Setting(QDialog,Ui_Setting):
         self.TitleSize.setValue(self.cfg.get("TitleSize", 40))
         self.LegendSize.setValue(self.cfg.get("LegendSize", 2))
         self.LineWidth.setValue(self.cfg.get("LineWidth", 5))
+        self.TreeName.setText(self.cfg.get("TreeName", "EXL50"))
+        self.TreeIp.setText(self.cfg.get("TreeIp", "192.168.20.11"))
         self.LineColor1.setStyleSheet("background-color:{}".format(self.cfg.get("LineColor1", "r")))
         self.LineColor2.setStyleSheet("background-color:{}".format(self.cfg.get("LineColor2", "b")))
 if __name__ == "__main__":
