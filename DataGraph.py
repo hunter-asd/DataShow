@@ -24,11 +24,13 @@ class Graph(QDialog):
         self.pw1.addLegend(size=(50,30),offset=(1,1)).setScale(ledgendSize)
         self.pw2.addLegend(size=(50,30),offset=(1,1)).setScale(ledgendSize)
         #画图
-        self.pw1_data1=self.pw1.plot(x, y, pen=pg.mkPen(lineColor1,width=lineWidth),name="p1d5")
+        self.pw1_data1=self.pw1.plot(x, y, pen=pg.mkPen(lineColor1,width=lineWidth),name="p1d1")
         self.pw1_data2=self.pw1.plot(x, y+10, pen=pg.mkPen(lineColor2,width=lineWidth),name="p1d2")
         self.pw2_data1=self.pw2.plot(x, y, pen=pg.mkPen(lineColor1,width=lineWidth),name="p2d1")
         self.pw2_data2=self.pw2.plot(x, y+10, pen=pg.mkPen(lineColor2,width=lineWidth),name="p2d2")
-
+        #标线
+        self.pw1.getPlotItem().showGrid(True, True)
+        self.pw2.getPlotItem().showGrid(True, True)
         self.axisfont=QFont()
         self.axisfont.setPointSize(tickSize)
         # 设置X轴Tick
