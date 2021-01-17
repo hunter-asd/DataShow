@@ -2,19 +2,31 @@ import pyqtgraph as pg
 from PyQt5.QtWidgets import QVBoxLayout,QDialog,QApplication
 from PyQt5.QtGui import QFont
 import numpy as np
-from PyQt5 import Qt
+from PyQt5.QtCore import Qt
 import sys
 class Graph(QDialog):
     def __init__(self,x,title,width,height,tickSize,lineWidth,ledgendSize,lw,bh,lineColor1,lineColor2):
+        # x:数据图的序数，用来定位显示位置
+        # title:数据图标题
+        # width：数据图宽度
+        # height：数据图高度
+        # tickSize：图标尺尺寸
+        # lineWidth：数据图线宽
+        # ledgendSize：图例尺寸
+        # lw：图示左坐标轴宽度
+        # bh：图示下坐标轴高度
+        # lineColor1：线颜色
+        # lineColor2：线颜色
         super(Graph, self).__init__()
-        self.setWindowFlags(Qt.Qt.FramelessWindowHint)
+        self.setWindowFlags(Qt.FramelessWindowHint)
         self.setWindowTitle(title)
         self.setGeometry(x,0,width,height)
         self.vlayout=QVBoxLayout()
+        self.setAttribute(Qt.WA_DeleteOnClose)
         pg.setConfigOptions(leftButtonPan=False)
         pg.setConfigOption('background', 'k')
         pg.setConfigOption('foreground', 'w')
-        x = np.array([])
+        time = np.array([])
         y = np.array([])
         # r_symbol = np.random.choice(['o', 's', 't', 't1', 't2', 't3', 'd', '+', 'x', 'p', 'h', 'star'])
         # r_color = np.random.choice(['b', 'g', 'r', 'c', 'm', 'y', 'k', 'd', 'l', 's'])
@@ -24,10 +36,10 @@ class Graph(QDialog):
         self.pw1.addLegend(size=(50,30),offset=(1,1)).setScale(ledgendSize)
         self.pw2.addLegend(size=(50,30),offset=(1,1)).setScale(ledgendSize)
         #画图
-        self.pw1_data1=self.pw1.plot(x, y, pen=pg.mkPen(lineColor1,width=lineWidth),name="p1d1")
-        self.pw1_data2=self.pw1.plot(x, y+10, pen=pg.mkPen(lineColor2,width=lineWidth),name="p1d2")
-        self.pw2_data1=self.pw2.plot(x, y, pen=pg.mkPen(lineColor1,width=lineWidth),name="p2d1")
-        self.pw2_data2=self.pw2.plot(x, y+10, pen=pg.mkPen(lineColor2,width=lineWidth),name="p2d2")
+        self.pw1_data1=self.pw1.plot(time, y, pen=pg.mkPen(lineColor1,width=lineWidth),name="p1d1")
+        self.pw1_data2=self.pw1.plot(time, y+10, pen=pg.mkPen(lineColor2,width=lineWidth),name="p1d2")
+        self.pw2_data1=self.pw2.plot(time, y, pen=pg.mkPen(lineColor1,width=lineWidth),name="p2d1")
+        self.pw2_data2=self.pw2.plot(time, y+10, pen=pg.mkPen(lineColor2,width=lineWidth),name="p2d2")
         #标线
         self.pw1.getPlotItem().showGrid(True, True)
         self.pw2.getPlotItem().showGrid(True, True)
@@ -52,7 +64,7 @@ class Graph(QDialog):
 
 
         #设置title
-        self.pw1.setTitle("<p style='font-size:{}px'>{}</p>".format(50,5201))
+        self.pw1.setTitle("<p style='font-size:{}px'>{}</p>".format(50,"shotnum"))
 
         #图例
         # self.legend1=pg.LegendItem((50,30),offset=(70,30))
@@ -74,6 +86,6 @@ class Graph(QDialog):
 
 if __name__=="__main__":
     app=QApplication(sys.argv)
-    DSM=Graph(0, "ds", 1920, 1080,40,5)
+    DSM=Graph(0, "ds", 700, 600,20,10,5,5,40,"r","b")
     DSM.show()
     sys.exit(app.exec_())
